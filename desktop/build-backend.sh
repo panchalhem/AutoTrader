@@ -14,12 +14,14 @@ AUTOMATION="$REPO_ROOT/automation"
 OUT_DIR="$SCRIPT_DIR/backend/mac"
 BUILD_VENV="$SCRIPT_DIR/.build-venv-mac"
 
+# dashboard.py's only third-party import is pandas (strategy_config.py and
+# trading_settings.py, its two internal deps, are stdlib-only) — no need for
+# the full repo requirements.txt here.
 echo "Setting up a throwaway build venv..."
 rm -rf "$BUILD_VENV"
 python3 -m venv "$BUILD_VENV"
 "$BUILD_VENV/bin/pip" install --upgrade pip
-"$BUILD_VENV/bin/pip" install -r "$REPO_ROOT/requirements.txt"
-"$BUILD_VENV/bin/pip" install pyinstaller
+"$BUILD_VENV/bin/pip" install pandas==3.0.5 pyinstaller
 
 echo "Running PyInstaller (onedir)..."
 rm -rf "$OUT_DIR"

@@ -11,13 +11,18 @@ $RepoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 $Automation = Join-Path $RepoRoot "automation"
 $OutDir = Join-Path $PSScriptRoot "backend\win"
 
+# dashboard.py's only third-party import is pandas (strategy_config.py and
+# trading_settings.py, its two internal deps, are stdlib-only) — installing
+# the full repo requirements.txt here is unnecessary AND breaks the build:
+# it pulls in uvloop, which has no Windows wheel and fails the whole
+# `pip install -r` before anything (including pandas) gets installed.
 Write-Host "Setting up a throwaway build venv..."
 $BuildVenv = Join-Path $PSScriptRoot ".build-venv-win"
 if (Test-Path $BuildVenv) { Remove-Item -Recurse -Force $BuildVenv }
 python -m venv $BuildVenv
 & "$BuildVenv\Scripts\pip.exe" install --upgrade pip
-& "$BuildVenv\Scripts\pip.exe" install -r (Join-Path $RepoRoot "requirements.txt")
-& "$BuildVenv\Scripts\pip.exe" install pyinstaller
+& "$BuildVenv\Scripts\pip.exe" install pandas==3.0.5 pyinstaller
+if ($LASTEXITCODE -ne 0) { throw "pip install failed (exit $LASTEXITCODE)" }
 
 Write-Host "Running PyInstaller (onedir)..."
 if (Test-Path $OutDir) { Remove-Item -Recurse -Force $OutDir }

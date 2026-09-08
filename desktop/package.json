@@ -19,6 +19,7 @@
   "build": {
     "appId": "com.autotrader.desktop",
     "productName": "AutoTrader",
+    "publish": null,
     "directories": {
       "output": "dist",
       "buildResources": "build-assets"
