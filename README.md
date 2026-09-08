@@ -89,11 +89,65 @@ directory and skips the prompt on future launches. The app then spawns
 `automation/dashboard.py` itself and displays it, auto-authenticating with
 the same Basic Auth the dashboard already uses.
 
+### Building a double-click installer (.exe / .dmg)
+
+The desktop app now packages into a real installer with an embedded Python
+backend — the end user does **not** need Python, Node, or this repo. The
+backend (`automation/dashboard.py` + its dependencies) is frozen with
+PyInstaller into a self-contained executable, then `electron-builder` wraps
+it into an NSIS installer (Windows) or a `.dmg` (Mac). The Windows installer
+prompts for an install location (not one-click, not admin-elevated — a
+per-user install into a folder you choose).
+
+**Easiest path — let GitHub build both automatically:** push a version tag
+and `.github/workflows/build-desktop.yml` builds the Windows `.exe` and Mac
+`.dmg` on GitHub's own Windows/Mac runners and attaches them to a GitHub
+Release:
+
+```bash
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+Then download the installer straight from the repo's Releases page — no
+local Windows or Mac machine needed. You can also trigger a test build
+without tagging from the Actions tab ("Build desktop installers" →
+"Run workflow").
+
+**Building locally instead**, e.g. on your own Windows laptop:
+
+```powershell
+cd desktop
+powershell -ExecutionPolicy Bypass -File build-backend.ps1   # freezes dashboard.py -> backend/win/
+npm install
+npm run dist:win                                              # -> desktop/dist/*.exe
+```
+
+And on a Mac:
+
+```bash
+cd desktop
+./build-backend.sh          # freezes dashboard.py -> backend/mac/
+npm install
+npm run dist:mac             # -> desktop/dist/*.dmg
+```
+
+Both require Python 3.11+ on the *build* machine only (used to create a
+throwaway venv and run PyInstaller); the resulting installer needs nothing
+on the end user's machine beyond the OS itself.
+
 ### Notes / what's not built yet
 
-- Packaging into installers (`electron-builder`) and an embedded Python
-  runtime for non-technical end users isn't wired up — this currently
-  assumes the client machine has the repo, `.venv`, and Node available.
+- **Control Panel (start/stop/restart/discover) doesn't work from the
+  packaged installer.** Those buttons wrap `automation/stock.sh`, a bash
+  script — it isn't bundled (a shell script can't be frozen into the
+  Windows/Mac backend exe the same way Python code can) and doesn't run
+  natively on Windows. Clicking them in a packaged build now returns a clear
+  error explaining this, instead of failing silently. The live
+  positions/P&L monitoring view (the main reason to use the desktop app)
+  works fully in the packaged build — only the Control Panel's
+  start/stop/restart/discover actions are source-checkout-only, run those
+  from a terminal (Linux/Mac, or WSL on Windows) instead.
 - License enforcement currently lives in the desktop shell only (blocks
   reaching the dashboard); the API/dashboard themselves don't independently
   check license status yet — a real deployment should add that as

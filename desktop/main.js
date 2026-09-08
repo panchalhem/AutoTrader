@@ -18,8 +18,22 @@ const jwt = require('jsonwebtoken');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 const AUTOMATION_DIR = path.join(REPO_ROOT, 'automation');
-const PUBLIC_KEY_FILE = path.join(REPO_ROOT, 'license_server', 'keys', 'license_public_key.pem');
-const DASHBOARD_PASSWORD_FILE = path.join(AUTOMATION_DIR, 'data', '.dashboard_password');
+// Packaged build: main.js ships inside app.asar, so __dirname-relative
+// lookups above don't reach the unpacked repo. Everything the app needs at
+// runtime instead comes from process.resourcesPath, populated by the
+// electron-builder "extraResources" entries in package.json (see
+// build-backend.sh/.ps1 which produce backend/win|mac/dashboard via
+// PyInstaller before packaging).
+const PUBLIC_KEY_FILE = app.isPackaged
+  ? path.join(process.resourcesPath, 'license_public_key.pem')
+  : path.join(REPO_ROOT, 'license_server', 'keys', 'license_public_key.pem');
+// Dev mode writes/reads the password next to dashboard.py in the repo, same
+// as running it from a terminal. Packaged mode uses the frozen backend's own
+// on-disk bundle dir (writable — PyInstaller --onedir, installed per-user),
+// which the backend resolves itself relative to its own executable.
+const DASHBOARD_PASSWORD_FILE = app.isPackaged
+  ? path.join(process.resourcesPath, 'backend', '_internal', 'data', '.dashboard_password')
+  : path.join(AUTOMATION_DIR, 'data', '.dashboard_password');
 const LICENSE_STORE_FILE = path.join(app.getPath('userData'), 'license.json');
 const DASHBOARD_PORT = 8787;
 
@@ -73,17 +87,32 @@ function waitForPort(port, timeoutMs = 20000) {
 }
 
 function spawnDashboard() {
-  const venvPython = process.platform === 'win32'
-    ? path.join(REPO_ROOT, '.venv', 'Scripts', 'python.exe')
-    : path.join(REPO_ROOT, '.venv', 'bin', 'python');
-  const python = fs.existsSync(venvPython) ? venvPython : 'python3';
+  if (app.isPackaged) {
+    // Frozen backend (PyInstaller --onedir): a self-contained dashboard.exe
+    // (or "dashboard" on mac) bundled next to its _internal/ deps — no
+    // system Python required on the end-user's machine.
+    const exeName = process.platform === 'win32' ? 'dashboard.exe' : 'dashboard';
+    const backendExe = path.join(process.resourcesPath, 'backend', exeName);
+    dashboardProcess = spawn(backendExe, ['--no-open', '--port', String(DASHBOARD_PORT)], {
+      cwd: path.dirname(backendExe),
+      env: process.env,
+    });
+  } else {
+    const venvPython = process.platform === 'win32'
+      ? path.join(REPO_ROOT, '.venv', 'Scripts', 'python.exe')
+      : path.join(REPO_ROOT, '.venv', 'bin', 'python');
+    const python = fs.existsSync(venvPython) ? venvPython : 'python3';
 
-  dashboardProcess = spawn(python, ['dashboard.py', '--no-open', '--port', String(DASHBOARD_PORT)], {
-    cwd: AUTOMATION_DIR,
-    env: process.env,
-  });
+    dashboardProcess = spawn(python, ['dashboard.py', '--no-open', '--port', String(DASHBOARD_PORT)], {
+      cwd: AUTOMATION_DIR,
+      env: process.env,
+    });
+  }
   dashboardProcess.stdout.on('data', (d) => process.stdout.write(`[dashboard] ${d}`));
   dashboardProcess.stderr.on('data', (d) => process.stderr.write(`[dashboard] ${d}`));
+  dashboardProcess.on('error', (err) => {
+    process.stderr.write(`[dashboard] failed to start: ${err.message}\n`);
+  });
 }
 
 async function openMainWindow() {

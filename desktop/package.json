@@ -5,12 +5,51 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "start:headless": "xvfb-run -a electron . --no-sandbox"
+    "start:headless": "xvfb-run -a electron . --no-sandbox",
+    "dist:win": "electron-builder --win",
+    "dist:mac": "electron-builder --mac"
   },
   "dependencies": {
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "electron": "^33.0.0"
+    "electron": "^33.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.autotrader.desktop",
+    "productName": "AutoTrader",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build-assets"
+    },
+    "files": [
+      "main.js",
+      "lock.html",
+      "renderer/**/*",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "extraResources": [
+        { "from": "backend/win/dashboard", "to": "backend" },
+        { "from": "../license_server/keys/license_public_key.pem", "to": "license_public_key.pem" }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": [{ "target": "dmg", "arch": ["x64", "arm64"] }],
+      "category": "public.app-category.finance",
+      "extraResources": [
+        { "from": "backend/mac/dashboard", "to": "backend" },
+        { "from": "../license_server/keys/license_public_key.pem", "to": "license_public_key.pem" }
+      ]
+    }
   }
 }

@@ -731,6 +731,19 @@ _VALID_MODES = ("demo", "live", "dry-run")
 _VALID_SOURCES = ("nse", "us", "both")
 
 
+def _stock_sh_unavailable():
+    """stock.sh is a bash script — not present (or not runnable) in the
+    packaged Windows/Mac desktop build, which bundles only the frozen
+    dashboard.py backend. Control Panel start/stop/restart/discover need the
+    full automation/ source tree with a shell to run stock.sh in; give a
+    clear error here instead of a raw FileNotFoundError from Popen."""
+    if not STOCK_SH.exists():
+        return "Control Panel actions need automation/stock.sh, which isn't bundled in this packaged app. Run from the full source checkout (Linux/Mac, or WSL on Windows) instead."
+    if sys.platform == "win32" and not os.environ.get("WSL_DISTRO_NAME"):
+        return "stock.sh is a bash script and can't run directly on Windows. Use WSL, or run the automation from Linux/Mac."
+    return None
+
+
 def _run_detached(args):
     """For actions that take minutes (restart, rebuild, discover) — launch
     and return immediately rather than blocking the HTTP response on a
@@ -740,6 +753,9 @@ def _run_detached(args):
     each action's own log file, which stock.sh already writes to) so the
     dashboard has one place to show "what did the last click actually do."
     """
+    unavailable = _stock_sh_unavailable()
+    if unavailable:
+        return {"ok": False, "error": unavailable}
     with open(CONTROL_LOG, "a") as f:
         f.write(f"\n[{datetime.now(timezone.utc).isoformat(timespec='seconds')}] $ {' '.join(args)}\n")
         f.flush()
@@ -749,6 +765,9 @@ def _run_detached(args):
 
 
 def _run_sync(args, timeout=15):
+    unavailable = _stock_sh_unavailable()
+    if unavailable:
+        return {"ok": False, "error": unavailable}
     try:
         proc = subprocess.run(args, capture_output=True, text=True, timeout=timeout, cwd=str(ROOT.parent))
         ok = proc.returncode == 0
