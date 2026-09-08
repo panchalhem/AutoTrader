@@ -1901,7 +1901,11 @@ setInterval(refreshPositions, 2000);
 """
 
 
-DASHBOARD_PASSWORD_FILE = ROOT / "data" / ".dashboard_password"
+# DASHBOARD_DATA_DIR overrides where the password file lives — the packaged
+# desktop app (frozen via PyInstaller) sets this to a guaranteed-writable
+# per-user directory, since __file__/ROOT resolution inside a frozen exe
+# isn't a real, predictable filesystem path to write into.
+DASHBOARD_PASSWORD_FILE = Path(os.environ.get("DASHBOARD_DATA_DIR", str(ROOT / "data"))) / ".dashboard_password"
 
 
 def _load_or_create_password():

@@ -28,11 +28,13 @@ const PUBLIC_KEY_FILE = app.isPackaged
   ? path.join(process.resourcesPath, 'license_public_key.pem')
   : path.join(REPO_ROOT, 'license_server', 'keys', 'license_public_key.pem');
 // Dev mode writes/reads the password next to dashboard.py in the repo, same
-// as running it from a terminal. Packaged mode uses the frozen backend's own
-// on-disk bundle dir (writable — PyInstaller --onedir, installed per-user),
-// which the backend resolves itself relative to its own executable.
+// as running it from a terminal. Packaged mode instead points the backend at
+// Electron's own userData dir via DASHBOARD_DATA_DIR (see spawnDashboard) —
+// guaranteed writable and a real, stable path, unlike trying to guess where
+// PyInstaller's frozen __file__ resolution lands inside the bundle.
+const PACKAGED_DATA_DIR = path.join(app.getPath('userData'), 'dashboard-data');
 const DASHBOARD_PASSWORD_FILE = app.isPackaged
-  ? path.join(process.resourcesPath, 'backend', '_internal', 'data', '.dashboard_password')
+  ? path.join(PACKAGED_DATA_DIR, '.dashboard_password')
   : path.join(AUTOMATION_DIR, 'data', '.dashboard_password');
 const LICENSE_STORE_FILE = path.join(app.getPath('userData'), 'license.json');
 const DASHBOARD_PORT = 8787;
@@ -93,9 +95,10 @@ function spawnDashboard() {
     // system Python required on the end-user's machine.
     const exeName = process.platform === 'win32' ? 'dashboard.exe' : 'dashboard';
     const backendExe = path.join(process.resourcesPath, 'backend', exeName);
+    fs.mkdirSync(PACKAGED_DATA_DIR, { recursive: true });
     dashboardProcess = spawn(backendExe, ['--no-open', '--port', String(DASHBOARD_PORT)], {
       cwd: path.dirname(backendExe),
-      env: process.env,
+      env: { ...process.env, DASHBOARD_DATA_DIR: PACKAGED_DATA_DIR },
     });
   } else {
     const venvPython = process.platform === 'win32'
