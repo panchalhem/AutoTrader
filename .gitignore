@@ -3,3 +3,13 @@ __pycache__/
 *.pyc
 data/*.csv
 output/
+.env
+automation/.env
+.env.keys
+automation/.env.keys
+*.env.keys
+automation/data/.dashboard_password
+license_server/data/
+license_server/keys/license_private_key.pem
+node_modules/
+desktop/node_modules/

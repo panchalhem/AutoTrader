@@ -1,0 +1,210 @@
+{
+  "GC=F": {
+    "epic": "GOLD",
+    "instrumentName": "Gold"
+  },
+  "COHR": {
+    "epic": "COHR",
+    "instrumentName": "COHERENT CORP"
+  },
+  "MU": {
+    "epic": "MU",
+    "instrumentName": "Micron Technology Inc"
+  },
+  "ZW=F": {
+    "epic": "WHEAT",
+    "instrumentName": "Wheat US"
+  },
+  "IREN": {
+    "epic": "IREN",
+    "instrumentName": "IREN Limited"
+  },
+  "TRX-USD": {
+    "epic": "TRXUSD",
+    "instrumentName": "TRON/USD"
+  },
+  "LINK-USD": {
+    "epic": "LINKUSD",
+    "instrumentName": "ChainLink/USD"
+  },
+  "CC=F": {
+    "epic": "USCOCOA",
+    "instrumentName": "Cocoa US"
+  },
+  "MRNA": {
+    "epic": "MRNA",
+    "instrumentName": "Moderna Inc"
+  },
+  "WDC": {
+    "epic": "WDC",
+    "instrumentName": "Western Digital"
+  },
+  "NOW": {
+    "epic": "NOW",
+    "instrumentName": "ServiceNow"
+  },
+  "RDDT": {
+    "epic": "RDDT",
+    "instrumentName": "Reddit Inc"
+  },
+  "ADBE": {
+    "epic": "ADBE",
+    "instrumentName": "Adobe Systems Inc"
+  },
+  "GME": {
+    "epic": "GME",
+    "instrumentName": "GameStop Corp"
+  },
+  "ASML": {
+    "epic": "ASML",
+    "instrumentName": "ASML Holding NV - ADR"
+  },
+  "KC=F": {
+    "epic": "COFFEEARABICA",
+    "instrumentName": "Coffee US"
+  },
+  "ADA-USD": {
+    "epic": "ADAUSD",
+    "instrumentName": "Cardano/USD"
+  },
+  "DOGE-USD": {
+    "epic": "DOGEUSD",
+    "instrumentName": "DogeCoin/USD"
+  },
+  "AAON": {
+    "epic": "AAON",
+    "instrumentName": "AAON Inc"
+  },
+  "RKLB": {
+    "epic": "RKLB",
+    "instrumentName": "Rocket Lab USA Inc"
+  },
+  "ETH-USD": {
+    "epic": "ETHUSD",
+    "instrumentName": "Ethereum/USD"
+  },
+  "MSTR": {
+    "epic": "MSTR",
+    "instrumentName": "Strategy Inc"
+  },
+  "AMKR": {
+    "epic": "AMKR",
+    "instrumentName": "Amkor Technology, Inc."
+  },
+  "AVAX-USD": {
+    "epic": "AVAXUSD",
+    "instrumentName": "Avalanche/USD"
+  },
+  "AAL": {
+    "epic": "AAL",
+    "instrumentName": "American Airlines Group Inc"
+  },
+  "HOOD": {
+    "epic": "HOOD",
+    "instrumentName": "Robinhood Markets Inc"
+  },
+  "COIN": {
+    "epic": "COIN",
+    "instrumentName": "Coinbase Global Inc"
+  },
+  "AVAV": {
+    "epic": "AVAV",
+    "instrumentName": "AeroVironment Inc"
+  },
+  "ALK": {
+    "epic": "ALK",
+    "instrumentName": "Alaska Air"
+  },
+  "APPF": {
+    "epic": "APPF",
+    "instrumentName": "Appfolio Inc"
+  },
+  "ORCL": {
+    "epic": "ORCL",
+    "instrumentName": "Oracle"
+  },
+  "BABA": {
+    "epic": "BABA",
+    "instrumentName": "Alibaba Group Holding Ltd - ADR"
+  },
+  "ALSN": {
+    "epic": "ALSN",
+    "instrumentName": "Allison Transmission"
+  },
+  "BAH": {
+    "epic": "BAH",
+    "instrumentName": "Booz Allen Hamilton Holding Corp"
+  },
+  "ALLY": {
+    "epic": "ALLY",
+    "instrumentName": "Ally Financial"
+  },
+  "ATI": {
+    "epic": "ATI",
+    "instrumentName": "ATI Inc"
+  },
+  "GOOGL": {
+    "epic": "GOOGL",
+    "instrumentName": "Alphabet Inc - A"
+  },
+  "GOOG": {
+    "epic": "GOOG",
+    "instrumentName": "Alphabet Inc - C"
+  },
+  "AIT": {
+    "epic": "AIT",
+    "instrumentName": "Applied Industrial Technologies Inc"
+  },
+  "AMG": {
+    "epic": "AMG",
+    "instrumentName": "Affiliated Managers"
+  },
+  "XRP-USD": {
+    "epic": "XRPUSD",
+    "instrumentName": "Ripple/USD"
+  },
+  "BTC-USD": {
+    "epic": "BTCUSD",
+    "instrumentName": "Bitcoin/USD"
+  },
+  "NVDA": {
+    "epic": "NVDA",
+    "instrumentName": "NVIDIA Corp"
+  },
+  "NKE": {
+    "epic": "NKE",
+    "instrumentName": "Nike Inc"
+  },
+  "HO=F": {
+    "epic": "HEATINGOIL",
+    "instrumentName": "Heating Oil"
+  },
+  "PA=F": {
+    "epic": "PALLADIUM",
+    "instrumentName": "Palladium"
+  },
+  "AMD": {
+    "epic": "AMD",
+    "instrumentName": "Advanced Micro Devices Inc"
+  },
+  "DELL": {
+    "epic": "DELL",
+    "instrumentName": "Dell Technologies Inc."
+  },
+  "SPY": {
+    "epic": "SPY",
+    "instrumentName": "SPDR S&P 500 ETF"
+  },
+  "IONQ": {
+    "epic": "IONQ",
+    "instrumentName": "IonQ, Inc."
+  },
+  "AAPL": {
+    "epic": "AAPL",
+    "instrumentName": "Apple Inc"
+  },
+  "NLY": {
+    "epic": "NLY",
+    "instrumentName": "Annaly Capital"
+  }
+}

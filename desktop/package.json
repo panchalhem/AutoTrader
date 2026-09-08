@@ -1,0 +1,16 @@
+{
+  "name": "trading-desktop",
+  "version": "0.1.0",
+  "description": "Desktop shell for the trading automation dashboard — license-gated, spawns the local Python backend and displays it in an Electron window.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "start:headless": "xvfb-run -a electron . --no-sandbox"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0"
+  }
+}

@@ -1,0 +1,631 @@
+{
+  "AAL": {
+    "name": "AAL",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 31,
+      "bt_win_rate": 0.581,
+      "bt_profit_factor": 1.876,
+      "bt_expectancy_r": 0.31,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "AAON": {
+    "name": "AAON",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 24,
+      "bt_win_rate": 0.542,
+      "bt_profit_factor": 1.622,
+      "bt_expectancy_r": 0.189,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "AIT": {
+    "name": "AIT",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 24,
+      "bt_win_rate": 0.625,
+      "bt_profit_factor": 1.496,
+      "bt_expectancy_r": 0.181,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "ALK": {
+    "name": "ALK",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 31,
+      "bt_win_rate": 0.581,
+      "bt_profit_factor": 1.997,
+      "bt_expectancy_r": 0.354,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "ALLY": {
+    "name": "ALLY",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 24,
+      "bt_win_rate": 0.708,
+      "bt_profit_factor": 2.215,
+      "bt_expectancy_r": 0.359,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "ALSN": {
+    "name": "ALSN",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 23,
+      "bt_win_rate": 0.739,
+      "bt_profit_factor": 3.54,
+      "bt_expectancy_r": 0.645,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "AMG": {
+    "name": "AMG",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 25,
+      "bt_win_rate": 0.48,
+      "bt_profit_factor": 1.351,
+      "bt_expectancy_r": 0.151,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "AMKR": {
+    "name": "AMKR",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 23,
+      "bt_win_rate": 0.435,
+      "bt_profit_factor": 1.74,
+      "bt_expectancy_r": 0.308,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "APPF": {
+    "name": "APPF",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 28,
+      "bt_win_rate": 0.464,
+      "bt_profit_factor": 1.362,
+      "bt_expectancy_r": 0.157,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "ATI": {
+    "name": "ATI",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 27,
+      "bt_win_rate": 0.407,
+      "bt_profit_factor": 1.458,
+      "bt_expectancy_r": 0.19,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "AVAV": {
+    "name": "AVAV",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 31,
+      "bt_win_rate": 0.581,
+      "bt_profit_factor": 1.924,
+      "bt_expectancy_r": 0.287,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "AVTR": {
+    "name": "AVTR",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 27,
+      "bt_win_rate": 0.556,
+      "bt_profit_factor": 1.411,
+      "bt_expectancy_r": 0.151,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "BAH": {
+    "name": "BAH",
+    "class": "stock",
+    "broker": "capitalcom",
+    "buckets": [
+      "us"
+    ],
+    "discovered_utc": "2026-08-24T13:42:21+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 29,
+      "bt_win_rate": 0.448,
+      "bt_profit_factor": 1.396,
+      "bt_expectancy_r": 0.128,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "ASHAPURMIN.NS": {
+    "name": "ASHAPURA MINECHEM",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-24T13:44:46+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 29,
+      "bt_win_rate": 0.552,
+      "bt_profit_factor": 1.429,
+      "bt_expectancy_r": 0.16,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "ANGELONE.NS": {
+    "name": "ANGEL ONE",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-24T13:44:46+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 23,
+      "bt_win_rate": 0.522,
+      "bt_profit_factor": 1.833,
+      "bt_expectancy_r": 0.288,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "BALRAMCHIN.NS": {
+    "name": "BALRAMPUR CHINI MILLS",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-24T13:44:46+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 26,
+      "bt_win_rate": 0.423,
+      "bt_profit_factor": 1.33,
+      "bt_expectancy_r": 0.139,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "BATAINDIA.NS": {
+    "name": "BATA INDIA",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-24T13:44:46+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 23,
+      "bt_win_rate": 0.522,
+      "bt_profit_factor": 1.405,
+      "bt_expectancy_r": 0.142,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "KHAICHEM.NS": {
+    "name": "KHAITAN CHEM & FERT",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 24,
+      "bt_win_rate": 0.583,
+      "bt_profit_factor": 1.789,
+      "bt_expectancy_r": 0.292,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "EQUITASBNK.NS": {
+    "name": "EQUITAS SMALL FIN BNK",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 29,
+      "bt_win_rate": 0.552,
+      "bt_profit_factor": 1.33,
+      "bt_expectancy_r": 0.103,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "EIHOTEL.NS": {
+    "name": "EIH - OBEROI HOTELS",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 23,
+      "bt_win_rate": 0.522,
+      "bt_profit_factor": 1.305,
+      "bt_expectancy_r": 0.12,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "FACT.NS": {
+    "name": "FACT",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 17,
+      "bt_win_rate": 0.588,
+      "bt_profit_factor": 2.402,
+      "bt_expectancy_r": 0.437,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "FEDERALBNK.NS": {
+    "name": "FEDERAL BANK",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 25,
+      "bt_win_rate": 0.6,
+      "bt_profit_factor": 1.717,
+      "bt_expectancy_r": 0.188,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "GABRIEL.NS": {
+    "name": "GABRIEL INDIA",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 26,
+      "bt_win_rate": 0.615,
+      "bt_profit_factor": 1.954,
+      "bt_expectancy_r": 0.304,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "NEWGEN.NS": {
+    "name": "NEWGEN SOFTWARE TECH",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 18,
+      "bt_win_rate": 0.556,
+      "bt_profit_factor": 2.28,
+      "bt_expectancy_r": 0.479,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "AMBER.NS": {
+    "name": "AMBER ENTERPRISES (I)",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 29,
+      "bt_win_rate": 0.414,
+      "bt_profit_factor": 1.499,
+      "bt_expectancy_r": 0.198,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "GLAND.NS": {
+    "name": "GLAND PHARMA",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 19,
+      "bt_win_rate": 0.632,
+      "bt_profit_factor": 1.901,
+      "bt_expectancy_r": 0.319,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "MARINE.NS": {
+    "name": "MARINE ELECTRICAL (I)",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 26,
+      "bt_win_rate": 0.538,
+      "bt_profit_factor": 1.758,
+      "bt_expectancy_r": 0.281,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "HEG.NS": {
+    "name": "HEG",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 20,
+      "bt_win_rate": 0.65,
+      "bt_profit_factor": 2.09,
+      "bt_expectancy_r": 0.304,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "HIMATSEIDE.NS": {
+    "name": "HIMATSINGKA SEIDE",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 24,
+      "bt_win_rate": 0.5,
+      "bt_profit_factor": 1.447,
+      "bt_expectancy_r": 0.182,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "ASTERDM.NS": {
+    "name": "ASTER DM QUALITY CARE",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 25,
+      "bt_win_rate": 0.52,
+      "bt_profit_factor": 1.802,
+      "bt_expectancy_r": 0.266,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "GMMPFAUDLR.NS": {
+    "name": "GMM PFAUDLER",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 25,
+      "bt_win_rate": 0.6,
+      "bt_profit_factor": 2.133,
+      "bt_expectancy_r": 0.368,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "BECTORFOOD.NS": {
+    "name": "MRS BECTORS FOOD SPE",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 27,
+      "bt_win_rate": 0.63,
+      "bt_profit_factor": 2.514,
+      "bt_expectancy_r": 0.395,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "KAJARIACER.NS": {
+    "name": "KAJARIA CERAMICS",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 26,
+      "bt_win_rate": 0.654,
+      "bt_profit_factor": 2.575,
+      "bt_expectancy_r": 0.378,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "CHENNPETRO.NS": {
+    "name": "CHENNAI PETROLEUM CORP LT",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 24,
+      "bt_win_rate": 0.458,
+      "bt_profit_factor": 1.391,
+      "bt_expectancy_r": 0.17,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "HUHTAMAKI.NS": {
+    "name": "HUHTAMAKI INDIA",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 19,
+      "bt_win_rate": 0.474,
+      "bt_profit_factor": 2.244,
+      "bt_expectancy_r": 0.313,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "RAYMOND.NS": {
+    "name": "RAYMOND",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-08-28T18:31:32+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 24,
+      "bt_win_rate": 0.458,
+      "bt_profit_factor": 1.455,
+      "bt_expectancy_r": 0.15,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  },
+  "BRIGADE.NS": {
+    "name": "BRIGADE ENTER.",
+    "class": "stock",
+    "broker": "zerodha",
+    "buckets": [
+      "zerodha"
+    ],
+    "discovered_utc": "2026-09-03T22:26:07+00:00",
+    "discovery_stats": {
+      "bt_trade_count": 23,
+      "bt_win_rate": 0.652,
+      "bt_profit_factor": 3.584,
+      "bt_expectancy_r": 0.577,
+      "bt_pass": true,
+      "bt_reason": null
+    }
+  }
+}

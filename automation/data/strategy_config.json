@@ -1,0 +1,11 @@
+{
+  "BREAKOUT_INTRADAY": {
+    "enabled": true
+  },
+  "BREAKOUT_SWING": {
+    "enabled": true
+  },
+  "INBOUNDTRADEALGO": {
+    "enabled": true
+  }
+}

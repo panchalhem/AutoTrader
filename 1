@@ -1,0 +1,52 @@
+#/-------------------[DOTENV_PUBLIC_KEY]--------------------/
+#/            public-key encryption for .env files          /
+#/       [how it works](https://dotenvx.com/encryption)     /
+#/----------------------------------------------------------/
+DOTENV_PUBLIC_KEY="036335adf361f9240d29e05f4061f8295e84db97795dd6ca086240cba2f4cecda4" # -fk ../.env.keys
+
+# .env
+# Copy this file to automation/.env and fill in your own values.
+# automation/.env is gitignored — never commit real credentials.
+#
+# Capital.com does NOT use your regular account login password here.
+# Generate a dedicated API key first: Capital.com app -> Settings ->
+# API integrations -> Generate new key (requires 2FA on your account).
+# You set a custom password for that key at creation time — that is
+# CAPITAL_API_PASSWORD below, not your account password. The key itself
+# is shown only once, at creation — copy it immediately.
+
+CAPITAL_API_KEY=encrypted:BA1/d79e4ZndrXJ+QfyJXpCn826jDItnwDC/1f5th1l2bYD//hQJsqVptV/x8qyAQqhs0ugPRgUInF6kuSCDX1iyCgH1AFrF2mxNflN+vDNKYBOO4VqCfrXI29oNY1IHdFtfRH6VVUFc3+445/65eys=
+CAPITAL_API_PASSWORD=encrypted:BDINI7YhBmuJRohZcBSU31LjPRFIAZQKUQFvlgHTE1FXClJydnwv7m7RHGVOLB7Lzp8zXY/LMTKijiWZNESzSPb5SUSIeTrG1OveCGRpjxQbnLwfqNSQIBrqlgemoV50t7FOP/FEcvF55dP+scRp
+CAPITAL_IDENTIFIER=encrypted:BHD/KxyA1UOOKSkGv/iA0cPVTCnK3pbywdUF17O7DkE/JOOGM6EbEpgNES1DdXx3LW8Z7N3KYDkFBOVKX+773Hztksox/vJmjhZuI7RpggNjTd7ZhzKAIox02esP246bnfdQ0gd0sbwynvenGlM7DW0nJ+zujpf4KQ==
+
+# "demo" (recommended while testing) or "live"
+CAPITAL_ENV=encrypted:BOqZLNOhTMr2MUT7rKsEHpnMJVQSd4mzEz5bhdoDlBeGaR5jusuS2xyT6RLXu98MqnLPoSZ7t0/FC1KfjGHgO5oRDuQWCy/IuSHZ6eagWUTpwffkyeAlWvF1ihNHrmm2smX/ccg=
+
+# --- Zerodha (Kite Connect) ---
+# ZERODHA_API_KEY / ZERODHA_API_SECRET: from developers.kite.trade after
+# creating an app (the free "Personal" tier covers order placement + GTT,
+# which is all this script uses).
+#
+# ZERODHA_USER_ID / ZERODHA_PASSWORD / ZERODHA_TOTP_SECRET: your actual
+# Zerodha login credentials, used ONLY to automate the daily login (Kite
+# access tokens expire every day at 6am — there is no way around a fresh
+# login each trading day). ZERODHA_TOTP_SECRET is the base32 secret shown
+# when you first set up TOTP 2FA (not a 6-digit code, not your app PIN) —
+# if you only have the authenticator app and not the original secret,
+# you'll need to reset 2FA on Zerodha to get a fresh one.
+#
+# This is more sensitive than the Capital.com credentials above: it's your
+# real account password, not a separate revocable API key. Use a strong,
+# dedicated password and keep this file out of anywhere it could leak.
+ZERODHA_API_KEY=encrypted:BEFwmkw4kEHvMtXIfa0CwDWjLRicn9dZIN4GZ0b7QAwIreUN6vqQRz3NXzGAV52vDCFVETtkAA0CLHkezjbNZfb2BpoxrZrSy71uZ+2BK/O9nNSKsXZvQsxX4Nv5TH0KlwC6uiiBHk1VbyVHInKNnz8=
+ZERODHA_API_SECRET=encrypted:BOz+YIcEPYxLVQueiNyJ49j3vVA6UO8sRf62Bt9zrIM6/1uMgTYszNGmZ4YDcHGQ/frmwGoevZr0JSJEawWZZX6XtBA5gBYE8LzW3tr/01Shv7Xrmh4zh76AfciL4MSgLCHld3yJL2AMIkwdH/OzPL5dk/AxxgV1VxDuej53zcsT
+ZERODHA_USER_ID=encrypted:BNhy14AiqFxpYHNIzVu+n9kyxZyR7Q36Rd+umaNFk+fs8D6vc4pk/YGmM6R6D0BiqJfhAQgutlDMzBW2xKU+wvjIeqRj+tFOiFqwZH7M3b/5sL+KgnM28NEnd9gOPgzQPN/5Ua6opg==
+ZERODHA_PASSWORD=encrypted:BN+USrtPOiCL8ordnYd7G2588uuyfAaYxPqlgofofRl+jddHsnjJsLB8/jqmmoPiqD4bk4fo/8bBb1OpvdDCbhwC8g/e+VMKfCdcrCitzdIp09ZgdL4kql5O8h/Q0qdVdWwq7RWhfF8H
+ZERODHA_TOTP_SECRET=encrypted:BGHpa7805scQVOOmVbLYRAePzSrTDdMq9iL+uI/i53qdxvfXiQapCK73ClV0SHhxcJeElT3ZVKidZt3ZM9Wjs1BVRkiPcZEuZCnkCvi1Znrtdp0oHepz/qoMFGvUiA7AMM+O9F0EMg==
+ZERODHA_ENV="encrypted:BOhShYhJkXL1LsWRiSJE/f5epmeZUdVD6RiNW9+mP786+n7kPdq46rijC0fb9G8INL2QKf6lAAZDnNCFvkO2Cuc3FZLh5dwsBzcp7fISZjIqTh/C199jcru3Nbw/Gjvx0pJyFdE="
+
+# Zerodha has NO sandbox/paper-trading account. "demo" here is simulated —
+# it behaves exactly like dry-run (nothing is ever sent to the real
+# broker) so the demo/live mental model stays consistent with Capital.com,
+# without ever mislabeling a real order as fake-money safe. Only "live"
+# places real Zerodha orders.

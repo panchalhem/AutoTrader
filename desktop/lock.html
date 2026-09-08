@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Activate</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 480px; margin: 80px auto; text-align: center; color: #1b1f24; }
+  textarea { width: 100%; height: 100px; font-family: monospace; font-size: 11px; margin-top: 16px; padding: 8px; }
+  button { margin-top: 12px; padding: 8px 20px; font-size: 14px; cursor: pointer; }
+  #error { color: #b42318; margin-top: 10px; font-size: 13px; min-height: 18px; }
+</style>
+</head>
+<body>
+<h2 id="title">Enter your license key</h2>
+<p id="subtitle">Paste the license token your vendor issued you.</p>
+<textarea id="token" placeholder="eyJhbGciOi..."></textarea>
+<div id="error"></div>
+<button id="activate">Activate</button>
+<script>
+  const { ipcRenderer } = require('electron');
+  document.getElementById('activate').onclick = async () => {
+    const token = document.getElementById('token').value.trim();
+    const errorEl = document.getElementById('error');
+    errorEl.textContent = '';
+    const result = await ipcRenderer.invoke('activate-license', token);
+    if (!result.valid) {
+      errorEl.textContent = 'Invalid license: ' + result.reason;
+    }
+  };
+</script>
+</body>
+</html>

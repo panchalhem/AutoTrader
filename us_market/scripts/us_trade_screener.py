@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 """
-On-demand NSE intraday/swing trade screener.
+On-demand US-market intraday/swing trade screener.
 
-Pulls the official Nifty 100 (Large), Nifty Midcap 150 (Mid), and Nifty
-Smallcap 250 (Small) constituent lists, downloads daily OHLCV for all of
-them, computes volatility/volume/breakout signals, and classifies each
+Pulls the current S&P 500 (Large), S&P 400 (Mid), and S&P 600 (Small)
+constituent lists from Wikipedia, downloads daily OHLCV for all of them via
+yfinance, computes volatility/volume/breakout signals, and classifies each
 stock into a trade bucket with a stop-loss and target.
 
 Usage:
-    ./.venv/bin/python scripts/trade_screener.py
-    ./.venv/bin/python scripts/trade_screener.py --refresh-lists
-    ./.venv/bin/python scripts/trade_screener.py --segments large,mid
-    ./.venv/bin/python scripts/trade_screener.py --top 15 --no-html
+    ./.venv/bin/python us_market/scripts/us_trade_screener.py
+    ./.venv/bin/python us_market/scripts/us_trade_screener.py --refresh-lists
+    ./.venv/bin/python us_market/scripts/us_trade_screener.py --segments large,mid
+    ./.venv/bin/python us_market/scripts/us_trade_screener.py --top 15 --no-html
 
-Outputs (in output/):
+Outputs (in us_market/output/):
     master_full_screen.csv       every stock, every computed metric
     master_buy_core.csv          breakout confirmed, RSI < overbought, liquid
     master_buy_caution.csv       breakout confirmed, RSI >= overbought or thin
@@ -23,11 +23,11 @@ Outputs (in output/):
     trade_setup.html             self-contained report, open in any browser
 """
 import argparse
-import json
+import io
 import sys
 import time
 import warnings
-from datetime import datetime, timedelta
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
@@ -56,12 +56,12 @@ EXTENDED_RET5D_PCT = -8.0
 WATCH_VOL_SURGE = 3.0
 
 SEGMENTS = {
-    "large": ("Large", "https://nsearchives.nseindia.com/content/indices/ind_nifty100list.csv", "nifty100_list.csv"),
-    "mid": ("Mid", "https://nsearchives.nseindia.com/content/indices/ind_niftymidcap150list.csv", "niftymidcap150_list.csv"),
-    "small": ("Small", "https://nsearchives.nseindia.com/content/indices/ind_niftysmallcap250list.csv", "nifty_smallcap250_list.csv"),
+    "large": ("Large", "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", "sp500_list.csv"),
+    "mid": ("Mid", "https://en.wikipedia.org/wiki/List_of_S%26P_400_companies", "sp400_list.csv"),
+    "small": ("Small", "https://en.wikipedia.org/wiki/List_of_S%26P_600_companies", "sp600_list.csv"),
 }
 
-HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)", "Accept": "text/csv"}
+HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
 
 
 def fetch_list(label, url, filename, refresh=False):
@@ -71,23 +71,16 @@ def fetch_list(label, url, filename, refresh=False):
         if age_days < LIST_MAX_AGE_DAYS:
             try:
                 df = pd.read_csv(path)
-                return [f"{s.strip()}.NS" for s in df["Symbol"].tolist()]
+                return [s.strip().replace(".", "-") for s in df["Symbol"].tolist()]
             except Exception:
                 pass
 
-    try:
-        resp = requests.get(url, headers=HEADERS, timeout=15)
-        resp.raise_for_status()
-        path.write_bytes(resp.content)
-    except Exception as e:
-        if path.exists():
-            print(f"[{label}] Failed to fetch from {url} ({e}). Using cached list as fallback.")
-        else:
-            raise e
-
-    df = pd.read_csv(path)
-    print(f"[{label}] fetched {len(df)} constituents -> {path.name}")
-    return [f"{s.strip()}.NS" for s in df["Symbol"].tolist()]
+    resp = requests.get(url, headers=HEADERS, timeout=15)
+    resp.raise_for_status()
+    table = pd.read_html(io.StringIO(resp.text))[0]
+    table[["Symbol"]].to_csv(path, index=False)
+    print(f"[{label}] fetched {len(table)} constituents -> {path.name}")
+    return [s.strip().replace(".", "-") for s in table["Symbol"].tolist()]
 
 
 def rsi(series, period=14):
@@ -148,7 +141,7 @@ def analyze_one(symbol, segment, df):
     trend_down = last_close < sma20 < sma50 if pd.notna(sma20) and pd.notna(sma50) else False
 
     return {
-        "symbol": symbol.replace(".NS", ""),
+        "symbol": symbol,
         "cap_segment": segment,
         "last_date": last_date.strftime("%Y-%m-%d"),
         "last_close": round(float(last_close), 2),
@@ -283,7 +276,7 @@ def render_html(buy_core, buy_caution, sell_core, sell_extended, watch, as_of_da
             for r in df.head(top_n).itertuples()
         )
 
-    html = f"""<!doctype html><html><head><meta charset="utf-8"><title>Trade Setup - {as_of_date}</title>
+    html = f"""<!doctype html><html><head><meta charset="utf-8"><title>US Trade Setup - {as_of_date}</title>
 <style>
 :root {{ --surface:#fcfcfb; --plane:#f9f9f7; --text:#0b0b0b; --sub:#52514e; --muted:#898781;
   --grid:#e1e0d9; --border:rgba(11,11,11,0.10); --blue:#2a78d6; --good:#0ca30c; --crit:#d03b3b; }}
@@ -309,8 +302,8 @@ th {{ color:var(--muted); font-size:0.7rem; text-transform:uppercase; }}
 .sell {{ color:var(--crit); font-weight:700; }}
 footer {{ color:var(--muted); font-size:0.78rem; border-top:1px solid var(--grid); padding-top:14px; margin-top:24px; }}
 </style></head><body>
-<h1>Trade Setup — {as_of_date}</h1>
-<p class="sub">Large (Nifty 100) + Mid (Nifty Midcap 150) + Small (Nifty Smallcap 250), regenerated on demand.</p>
+<h1>US Trade Setup — {as_of_date}</h1>
+<p class="sub">Large (S&amp;P 500) + Mid (S&amp;P 400) + Small (S&amp;P 600), regenerated on demand.</p>
 <div class="disclaimer"><b>Not investment advice.</b> Mechanical technical screen only — verify news/live quotes before trading.</div>
 
 <h2>Buy — core</h2>
@@ -334,7 +327,7 @@ footer {{ color:var(--muted); font-size:0.78rem; border-top:1px solid var(--grid
 <tbody>{rows_watch(watch)}</tbody></table></div>
 
 <footer>Liquidity floor: 20-day avg volume &gt; {LIQUIDITY_FLOOR:,}. Stops/targets use {STOP_ATR_MULT}x / {TARGET_ATR_MULT}x ATR(14).
-Generated by scripts/trade_screener.py</footer>
+Generated by us_market/scripts/us_trade_screener.py</footer>
 </body></html>"""
     out_path = OUT_DIR / "trade_setup.html"
     out_path.write_text(html)
@@ -342,7 +335,7 @@ Generated by scripts/trade_screener.py</footer>
 
 
 def main():
-    parser = argparse.ArgumentParser(description="On-demand NSE trade screener")
+    parser = argparse.ArgumentParser(description="On-demand US-market trade screener")
     parser.add_argument("--refresh-lists", action="store_true", help="Force re-download of index constituent lists")
     parser.add_argument("--segments", default="large,mid,small", help="Comma-separated: large,mid,small")
     parser.add_argument("--top", type=int, default=15, help="Rows to show per category")

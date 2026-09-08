@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>License Admin</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 960px; margin: 40px auto; padding: 0 16px; color: #1b1f24; }
+  h1 { font-size: 20px; }
+  h2 { font-size: 15px; margin-top: 36px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 13px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #e2e5e9; }
+  form { display: flex; gap: 8px; flex-wrap: wrap; align-items: end; margin-top: 8px; }
+  label { display: flex; flex-direction: column; font-size: 12px; gap: 2px; }
+  input, select { padding: 5px 7px; font-size: 13px; }
+  button { padding: 6px 14px; font-size: 13px; cursor: pointer; }
+  .token-box { font-family: monospace; font-size: 11px; background: #f4f5f7; padding: 8px; border-radius: 4px;
+               word-break: break-all; margin-top: 8px; display: none; }
+  .revoked { color: #b42318; }
+  .active { color: #067647; }
+</style>
+</head>
+<body>
+<h1>License Admin</h1>
+
+<h2>Create client</h2>
+<form id="client-form">
+  <label>Name <input name="name" required></label>
+  <label>Email <input name="email" type="email"></label>
+  <button type="submit">Create</button>
+</form>
+
+<h2>Issue license</h2>
+<form id="license-form">
+  <label>Client
+    <select name="client_id" id="client-select" required></select>
+  </label>
+  <label>Plan <input name="plan" value="standard"></label>
+  <label>Seats <input name="seats" type="number" value="1" min="1"></label>
+  <label>Validity (days) <input name="validity_days" type="number" value="365" min="1"></label>
+  <button type="submit">Issue</button>
+</form>
+<div class="token-box" id="token-box"></div>
+
+<h2>Clients</h2>
+<table id="clients-table"><thead><tr><th>Name</th><th>Email</th><th>Created</th></tr></thead><tbody></tbody></table>
+
+<h2>Licenses</h2>
+<table id="licenses-table">
+  <thead><tr><th>Client</th><th>Plan</th><th>Seats</th><th>Issued</th><th>Expires</th><th>Status</th><th></th></tr></thead>
+  <tbody></tbody>
+</table>
+
+<script>
+async function api(path, opts) {
+  const res = await fetch(path, opts);
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function refresh() {
+  const [clients, licenses] = await Promise.all([api('/admin/clients'), api('/admin/licenses')]);
+
+  const select = document.getElementById('client-select');
+  select.innerHTML = clients.map(c => `<option value="${c.id}">${c.name}</option>`).join('');
+
+  document.querySelector('#clients-table tbody').innerHTML = clients.map(c =>
+    `<tr><td>${c.name}</td><td>${c.email || ''}</td><td>${c.created_at}</td></tr>`
+  ).join('');
+
+  document.querySelector('#licenses-table tbody').innerHTML = licenses.map(l => `
+    <tr>
+      <td>${l.client_name}</td><td>${l.plan}</td><td>${l.seats}</td>
+      <td>${l.issued_at}</td><td>${l.expires_at}</td>
+      <td class="${l.revoked ? 'revoked' : 'active'}">${l.revoked ? 'revoked' : 'active'}</td>
+      <td>${l.revoked ? '' : `<button data-id="${l.id}" class="revoke-btn">Revoke</button>`}</td>
+    </tr>`
+  ).join('');
+
+  document.querySelectorAll('.revoke-btn').forEach(btn => {
+    btn.onclick = async () => {
+      await api(`/admin/licenses/${btn.dataset.id}/revoke`, { method: 'POST' });
+      refresh();
+    };
+  });
+}
+
+document.getElementById('client-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+  await api('/admin/clients', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+  e.target.reset();
+  refresh();
+};
+
+document.getElementById('license-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+  data.seats = Number(data.seats);
+  data.validity_days = Number(data.validity_days);
+  const result = await api('/admin/licenses', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(data) });
+  const box = document.getElementById('token-box');
+  box.style.display = 'block';
+  box.textContent = 'License token (give this to the client): ' + result.token;
+  refresh();
+};
+
+refresh();
+</script>
+</body>
+</html>
